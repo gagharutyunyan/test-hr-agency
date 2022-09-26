@@ -1,5 +1,6 @@
-function App() {
-  return <div>App</div>
-}
+import { Navigate, useRoutes } from 'react-router-dom'
+import { simpleMode } from './routes'
 
-export default App
+export const App = () => {
+  return useRoutes([...simpleMode, { path: '*', element: <Navigate to="/" /> }])
+}
