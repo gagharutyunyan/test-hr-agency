@@ -1,13 +1,12 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import { articleReducerPath, articleReducer, articleMiddleware } from '../services/articleService'
+import { configureStore } from '@reduxjs/toolkit'
+import createSagaMiddleware from 'redux-saga'
+import { rootSaga } from './saga'
+import { rootReducer } from './reducers'
 
-const rootReducer = combineReducers({
-  [articleReducerPath]: articleReducer,
+const sagaMiddleware = createSagaMiddleware()
+export const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
 })
 
-export const setupStore = () => {
-  return configureStore({
-    reducer: rootReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(articleMiddleware),
-  })
-}
+sagaMiddleware.run(rootSaga)
