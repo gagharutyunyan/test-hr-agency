@@ -5,7 +5,8 @@ import { articlesApi } from '../../../network'
 export function* getArticlesWorker(action) {
   try {
     const response = yield call(articlesApi.get, action.payload)
-    yield put(fillArticles(response.data))
+    console.log(action.payload)
+    yield put(fillArticles(response))
   } finally {
   }
 }

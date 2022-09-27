@@ -1,8 +1,30 @@
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react'
+import { Modal } from 'antd'
+import { Button } from '../shared/button'
 
 export const AddArticle = () => {
-  const dispatch = useDispatch()
-  const article = useSelector((state) => state.articleSlice.article)
+  const [isModalVisible, setIsModalVisible] = useState(false)
 
-  return <h1>add article</h1>
+  const modalOpen = () => {
+    setIsModalVisible(true)
+  }
+
+  const handleCancel = () => {
+    setIsModalVisible(false)
+  }
+  return (
+    <div>
+      <h1 onClick={modalOpen}>open</h1>
+      <Modal title="Новый артикль" open={isModalVisible} onCancel={handleCancel} footer={null} width="380px">
+        <input placeholder="Заголовок" className="defaultInput" type="text"></input>
+        <textarea placeholder="Описание" className="defaultInput textArea"></textarea>
+        <div className="modal-buttons">
+          <Button onClick={handleCancel}>done</Button>
+          <Button type="submit" wrong>
+            Подтвердить
+          </Button>
+        </div>
+      </Modal>
+    </div>
+  )
 }

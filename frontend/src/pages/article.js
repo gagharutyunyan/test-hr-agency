@@ -1,7 +1,9 @@
-import { useParams } from 'react-router-dom'
-import { getArticle } from '../store/reducers/article'
-import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { getArticle } from '../store/reducers/article'
+import { Comment } from '../components/comment'
+import { Paginator } from '../components/paginator'
 
 export const ArticlePage = () => {
   const dispatch = useDispatch()
@@ -12,5 +14,12 @@ export const ArticlePage = () => {
     dispatch(getArticle({ id }))
   }, [dispatch, id])
 
-  return <h1>{article?.id}</h1>
+  return (
+    <div>
+      go back
+      <h1>{article?.id}</h1>
+      <Comment />
+      <Paginator />
+    </div>
+  )
 }

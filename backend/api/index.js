@@ -6,15 +6,31 @@ var rndm = require('rndm')
 var ID_LENGTH = 24
 
 router.get('/article', function (req, res, next) {
-  var articles = mocks.articles.map(function (article) {
-      return assign({}, article, {
-        text: undefined,
-      })
-    }),
-    limit = Number(req.query.limit) || articles.length,
-    offset = Number(req.query.offset) || 0
+  const search = req.query.search
+  const from = req.query.from
+  const to = req.query.to
 
-  res.json({ data: articles.slice(offset, limit + offset), total: articles.length })
+  let articles = mocks.articles.map(function (article) {
+    return assign({}, article, {
+      text: undefined,
+    })
+  })
+
+  if (search) {
+    articles = articles.filter(({ title }) => title.includes(search.toLowerCase()))
+  }
+
+  if (from && to) {
+    articles = articles.filter((item) => {
+      return item.date.getTime() >= from.getTime() && item.date.getTime() <= to.getTime()
+    })
+  }
+
+  const limit = Number(req.query.limit) || 10
+  const offset = Number(req.query.offset) || 1
+  const sliced = articles.slice((offset - 1) * limit, offset * limit)
+
+  res.json({ data: sliced, total: articles.length })
 })
 
 router.get('/article/:id', function (req, res, next) {

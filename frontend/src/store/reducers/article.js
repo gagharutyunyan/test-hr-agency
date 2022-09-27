@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 export const articleSlice = createSlice({
   name: 'articleSlice',
-  initialState: { articles: [], article: {} },
+  initialState: { articles: {}, article: {} },
   reducers: {
     getArticles: () => {},
     getArticle: () => {},
@@ -12,8 +12,13 @@ export const articleSlice = createSlice({
     fillArticle: (state, { payload }) => {
       state.article = payload
     },
+    createArticle: (state, { payload }) => {
+      state.article = payload
+    },
     deleteArticle: (state, { payload: id }) => {
-      state.articles = state.articles.filter((el) => el.id !== id)
+      const filteredArticles = state.articles.data.filter((el) => el.id !== id)
+      state.articles.data = filteredArticles
+      state.articles.total -= 1
     },
   },
 })

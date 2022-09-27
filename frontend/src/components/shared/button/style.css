@@ -1,0 +1,41 @@
+.btn {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 10px;
+  color: #8c7f77;
+  border: 1px solid #8c7f77;
+  transition: all 0.2s linear;
+  min-height: 35px;
+}
+
+.btn:hover {
+  background: #8c7f77;
+  color: #fff;
+}
+
+.default-btn {
+  width: 179px;
+  height: 35px;
+  font-weight: 500;
+  font-size: 0.94rem;
+  line-height: 1rem;
+}
+
+.btn.wrong {
+  background: #ff8d8d;
+  color: #fff;
+  border-color: #ff8d8d;
+}
+
+.btn.wrong:hover {
+  border-color: #8c7f77;
+  background: #fff;
+  color: #8c7f77;
+}

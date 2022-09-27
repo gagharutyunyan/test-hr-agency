@@ -1,33 +1,41 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteArticle, getArticles } from '../store/reducers/article'
-import { Link } from 'react-router-dom'
+import { getArticles } from '../store/reducers/article'
+import { useSearchParams } from 'react-router-dom'
 import { AddArticle } from '../components/addArticle'
+import { Paginator } from '../components/paginator'
+import { useSetFilters } from '../hooks/useSetFilters'
+import { Article } from '../components/article'
 
 export const MainPage = () => {
+  const setFilters = useSetFilters()
+  const [URLParams] = useSearchParams()
   const dispatch = useDispatch()
-  const articles = useSelector((state) => state.articleSlice.articles)
+  const { data: articles = [], total = 0 } = useSelector((state) => state.articleSlice.articles)
 
-  const del = (id) => {
-    dispatch(deleteArticle(id))
+  const limit = parseInt(URLParams.get('limit')) || 10
+  const currentPage = parseInt(URLParams.get('offset')) || 1
+  const numPages = Math.ceil(total / limit || 1)
+
+  const setCurrentPage = (offset) => {
+    setFilters({ offset })
   }
-
   useEffect(() => {
-    dispatch(getArticles())
-  }, [dispatch])
+    dispatch(getArticles(Object.fromEntries(URLParams)))
+  }, [dispatch, URLParams])
 
   return (
     <div className="layout">
       <div className="sidebar">search, range</div>
-      <AddArticle />
-      {articles.map(({ id, title }) => {
-        return (
-          <Link to={`article/${id}`} onClick={() => del(id)} key={id}>
-            {title}
-          </Link>
-        )
-      })}
-      <div>paginator</div>
+      <div className="main">
+        <AddArticle />
+        {articles.map((article) => (
+          <Article {...article} />
+        ))}
+        <div>
+          <Paginator numPages={numPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+        </div>
+      </div>
     </div>
   )
 }

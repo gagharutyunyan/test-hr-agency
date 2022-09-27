@@ -1,0 +1,24 @@
+.articleContainer {
+  display: flex;
+  max-width: 400px;
+  gap: 25px;
+  margin: 25px 0;
+}
+
+.articleDescription {
+  position: relative;
+  width: 100%;
+}
+
+.articleTrash {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 30px;
+  height: 30px;
+}
+
+.articleTrash:hover {
+  color: red;
+  cursor: pointer;
+}
