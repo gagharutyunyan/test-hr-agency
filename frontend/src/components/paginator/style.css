@@ -1,14 +1,19 @@
 .pagination {
   display: flex;
   align-items: center;
+  max-width: 400px;
+  justify-content: center;
 }
+
 .pagination .pagination__pages {
   display: flex;
   align-items: center;
 }
+
 .pagination .pagination__pages a {
   margin-right: 20px;
 }
+
 .pagination .pagination__pages a:last-child {
   margin-right: 20px;
 }
@@ -22,9 +27,11 @@
   line-height: 17px;
   color: #858da6;
 }
+
 .pagination .pagination__spacer {
   margin-right: 25px;
 }
+
 .pagination a.active {
   display: flex;
   justify-content: center;
@@ -58,45 +65,7 @@
 .pagination .pagination__next.active {
   cursor: auto;
 }
-@media (max-width: 840px) {
-  .pagination {
-    justify-content: space-between;
-    width: 100%;
-  }
-  .pagination .pagination__pages a {
-    margin-right: 15px;
-  }
-  .pagination .pagination__spacer {
-    margin-right: 15px;
-  }
-}
-.page_paginator {
-  display: flex;
-  padding: 14px 0;
-  justify-content: space-between;
-  align-items: center;
-}
-@media (max-width: 840px) {
-  .page_paginator {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 15px;
-  }
-  .page_paginator .pagination__pages a {
-    margin-right: 20px;
-  }
-  .page_paginator .pagination__spacer {
-    margin-right: 20px;
-  }
-}
-@media (max-width: 600px) {
-  .page_paginator .pagination__pages a {
-    margin-right: 13px;
-  }
-  .page_paginator .pagination__spacer {
-    margin-right: 13px;
-  }
-}
+
 .paginator-num_pages {
   font-weight: 500;
   font-size: 12px;

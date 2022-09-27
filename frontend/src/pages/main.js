@@ -6,7 +6,7 @@ import { AddArticle } from '../components/addArticle'
 import { Paginator } from '../components/paginator'
 import { useSetFilters } from '../hooks/useSetFilters'
 import { Article } from '../components/article'
-import { Search } from '../components/search'
+import { Sidebar } from '../components/sidebar'
 
 export const MainPage = () => {
   const setFilters = useSetFilters()
@@ -27,11 +27,14 @@ export const MainPage = () => {
 
   return (
     <div className="layout">
-      <div className="sidebar">
-        <Search />, range
-      </div>
+      <Sidebar />
       <div className="main">
         <AddArticle />
+        {articles.length === 0 && (
+          <div className="empty">
+            <h1>Список артиклей пуст</h1>
+          </div>
+        )}
         {articles.map((article) => (
           <Article key={article.id} {...article} />
         ))}

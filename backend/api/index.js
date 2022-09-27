@@ -7,8 +7,10 @@ var ID_LENGTH = 24
 
 router.get('/article', function (req, res, next) {
   const search = req.query.search
-  const from = req.query.from
-  const to = req.query.to
+  const from = req.query.from && new Date(req.query.from)
+  const to = req.query.to && new Date(req.query.to)
+  const limit = Number(req.query.limit) || 5
+  const offset = Number(req.query.offset) || 1
 
   let articles = mocks.articles.map(function (article) {
     return assign({}, article, {
@@ -22,12 +24,11 @@ router.get('/article', function (req, res, next) {
 
   if (from && to) {
     articles = articles.filter((item) => {
-      return item.date.getTime() >= from.getTime() && item.date.getTime() <= to.getTime()
+      const time = new Date(item.date)
+      return time.getTime() >= from.getTime() && time.getTime() <= to.getTime()
     })
   }
 
-  const limit = Number(req.query.limit) || 5
-  const offset = Number(req.query.offset) || 1
   const sliced = articles.slice((offset - 1) * limit, offset * limit)
 
   res.json({ data: sliced, total: articles.length })
