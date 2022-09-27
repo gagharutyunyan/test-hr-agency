@@ -12,16 +12,19 @@ export const articleSlice = createSlice({
     fillArticle: (state, { payload }) => {
       state.article = payload
     },
+    fillNewArticle: (state, { payload }) => {
+      state.articles.data.unshift(payload.data)
+    },
     createArticle: (state, { payload }) => {
       state.article = payload
     },
     deleteArticle: (state, { payload: id }) => {
-      const filteredArticles = state.articles.data.filter((el) => el.id !== id)
-      state.articles.data = filteredArticles
+      state.articles.data = state.articles.data.filter((el) => el.id !== id)
       state.articles.total -= 1
     },
   },
 })
 
-export const { getArticles, fillArticles, fillArticle, getArticle, deleteArticle } = articleSlice.actions
+export const { getArticles, fillArticles, fillArticle, getArticle, deleteArticle, createArticle, fillNewArticle } =
+  articleSlice.actions
 export const { name: articleReducerPath, reducer: articleReducer } = articleSlice

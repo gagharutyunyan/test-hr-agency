@@ -6,6 +6,7 @@ import { AddArticle } from '../components/addArticle'
 import { Paginator } from '../components/paginator'
 import { useSetFilters } from '../hooks/useSetFilters'
 import { Article } from '../components/article'
+import { Search } from '../components/search'
 
 export const MainPage = () => {
   const setFilters = useSetFilters()
@@ -13,7 +14,7 @@ export const MainPage = () => {
   const dispatch = useDispatch()
   const { data: articles = [], total = 0 } = useSelector((state) => state.articleSlice.articles)
 
-  const limit = parseInt(URLParams.get('limit')) || 10
+  const limit = parseInt(URLParams.get('limit')) || 5
   const currentPage = parseInt(URLParams.get('offset')) || 1
   const numPages = Math.ceil(total / limit || 1)
 
@@ -26,11 +27,13 @@ export const MainPage = () => {
 
   return (
     <div className="layout">
-      <div className="sidebar">search, range</div>
+      <div className="sidebar">
+        <Search />, range
+      </div>
       <div className="main">
         <AddArticle />
         {articles.map((article) => (
-          <Article {...article} />
+          <Article key={article.id} {...article} />
         ))}
         <div>
           <Paginator numPages={numPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />

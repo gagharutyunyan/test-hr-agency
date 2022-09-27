@@ -26,7 +26,7 @@ router.get('/article', function (req, res, next) {
     })
   }
 
-  const limit = Number(req.query.limit) || 10
+  const limit = Number(req.query.limit) || 5
   const offset = Number(req.query.offset) || 1
   const sliced = articles.slice((offset - 1) * limit, offset * limit)
 
@@ -51,7 +51,7 @@ router.post('/article', function (req, res, next) {
     user: body.user,
     date: new Date(),
   }
-  mocks.articles.push(article)
+  mocks.articles.unshift(article)
   res.json(article)
 })
 

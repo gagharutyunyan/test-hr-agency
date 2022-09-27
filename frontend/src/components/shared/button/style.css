@@ -39,3 +39,10 @@
   background: #fff;
   color: #8c7f77;
 }
+
+.btn:disabled {
+  border-color: #e3e5e5;
+  background: #e3e5e5;
+  pointer-events: none;
+  color: #fff;
+}

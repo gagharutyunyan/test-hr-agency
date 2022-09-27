@@ -1,0 +1,21 @@
+.addArticleContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 400px;
+  padding: 25px 0;
+  border: 2px solid black;
+}
+
+.addArticleContainer:hover {
+  border: 2px solid #ff8d8d;
+  cursor: pointer;
+}
+
+.addArticleContainer:hover {
+  color: #ff8d8d;
+}
+
+.addArticleTitle {
+  color: inherit;
+}
