@@ -6,6 +6,7 @@
   background: #fff;
   cursor: pointer;
   width: 100%;
+  max-width: 175px;
   font-size: 1rem;
   font-weight: 500;
   border-radius: 10px;

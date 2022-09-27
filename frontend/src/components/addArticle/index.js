@@ -52,9 +52,9 @@ export const AddArticle = () => {
             className="defaultInput textArea"
           ></textarea>
           <div className="modal-buttons">
-            <Button onClick={handleCancel}>done</Button>
+            <Button onClick={handleCancel}>Отмена</Button>
             <Button type="submit" wrong disabled={!isValid}>
-              Подтвердить
+              Добавить
             </Button>
           </div>
         </form>

@@ -54,3 +54,21 @@ body {
   padding: 30px;
   max-width: 400px;
 }
+
+.articlePageContainer {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+.goBackLink {
+  display: inline-flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.goBackLink svg {
+  position: relative;
+  top: 3px;
+  right: 5px;
+}
