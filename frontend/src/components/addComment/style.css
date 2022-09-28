@@ -1,0 +1,4 @@
+.addCommentFrom {
+  display: flex;
+  flex-direction: column;
+}

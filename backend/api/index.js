@@ -83,7 +83,7 @@ router.post('/comment', function (req, res, next) {
     user: req.body.user,
     article: req.body.article,
   }
-  mocks.comments.push(comment)
+  mocks.comments.unshift(comment)
   res.json(comment)
 })
 

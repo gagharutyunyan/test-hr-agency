@@ -5,6 +5,6 @@ export const commentsApi = {
     return httpClient.get(`comment`, { params: payload }).then((res) => res.data)
   },
   post: (payload) => {
-    return httpClient.post('article', payload)
+    return httpClient.post('comment', payload)
   },
 }

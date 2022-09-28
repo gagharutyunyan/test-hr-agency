@@ -8,6 +8,7 @@ import { AiOutlineLeft } from 'react-icons/ai'
 import { AddComment } from '../components/addComment'
 import { getComments } from '../store/reducers/comments'
 import { useSetFilters } from '../hooks/useSetFilters'
+import { Spin } from 'antd'
 
 export const ArticlePage = () => {
   const setFilters = useSetFilters()
@@ -15,8 +16,13 @@ export const ArticlePage = () => {
   const [URLParams] = useSearchParams()
   const { id } = useParams()
 
-  const { title, text } = useSelector((state) => state.articleSlice.article)
-  const { records: comments, total } = useSelector((state) => state.commentsSlice.comments)
+  const { title, text, isLoading: isArticleLoading = null } = useSelector((state) => state.articleSlice.article)
+  const {
+    records: comments,
+    total,
+    isLoading: isCommentsLoading = null,
+  } = useSelector((state) => state.commentsSlice.comments)
+  const isLoading = isArticleLoading || isCommentsLoading
 
   const limit = parseInt(URLParams.get('limit')) || 3
   const currentPage = parseInt(URLParams.get('offset')) || 1
@@ -36,15 +42,25 @@ export const ArticlePage = () => {
       <Link to="/" className="goBackLink">
         <AiOutlineLeft /> <span>На главную</span>
       </Link>
-      <h1>{title}</h1>
-      <p>{text}</p>
+      <Spin tip="Loading..." spinning={isLoading}>
+        <h1>{title}</h1>
+        <p>{text}</p>
+      </Spin>
       <AddComment />
-      <div className="articleCommentsContainer">
-        {comments.map((props) => (
-          <Comment {...props} />
-        ))}
-      </div>
-      <Paginator numPages={numPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+
+      {comments.length !== 0 && (
+        <>
+          <Spin tip="Loading..." spinning={isLoading}>
+            <div className="articleCommentsContainer">
+              {comments.map((props) => (
+                <Comment key={props.id} {...props} />
+              ))}
+            </div>
+          </Spin>
+
+          <Paginator numPages={numPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+        </>
+      )}
     </div>
   )
 }
