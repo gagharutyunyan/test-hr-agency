@@ -57,20 +57,22 @@ router.post('/article', function (req, res, next) {
 })
 
 router.get('/comment', function (req, res, next) {
-  var aid = req.query.article || null
-  var limit = Number(req.query.limit) || mocks.comments.length
-  var offset = Number(req.query.offset) || 0
+  const aid = req.query.article || null
+  const limit = Number(req.query.limit) || 5
+  const offset = Number(req.query.offset) || 1
 
-  var comments =
+  const comments =
     aid !== null
       ? mocks.comments.filter(function (comment) {
           return comment.article === aid
         })
       : mocks.comments
 
+  const sliced = comments.slice((offset - 1) * limit, offset * limit)
+
   res.json({
+    records: sliced,
     total: comments.length,
-    records: comments.slice(offset, limit + offset),
   })
 })
 

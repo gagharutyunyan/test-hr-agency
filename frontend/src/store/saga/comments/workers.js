@@ -1,12 +1,12 @@
 import { call, put } from 'redux-saga/effects'
-import { fillArticle, fillArticles, fillNewArticle } from '../../reducers/article'
-import { articlesApi } from '../../../network'
+import { fillComments } from '../../reducers/comments'
+import { commentsApi } from '../../../network/api/comment'
 
 export function* getArticleCommentsWorker(action) {
   try {
-    const response = yield call(articlesApi.get, action.payload)
+    const response = yield call(commentsApi.get, action.payload)
     console.log(action.payload)
-    yield put(fillArticles(response))
+    yield put(fillComments(response))
   } finally {
   }
 }

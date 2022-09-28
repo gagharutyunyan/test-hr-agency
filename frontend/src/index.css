@@ -69,6 +69,13 @@ body {
 
 .goBackLink svg {
   position: relative;
-  top: 3px;
   right: 5px;
+  width: 16px;
+  height: 16px;
+}
+
+.articleCommentsContainer {
+  padding: 20px;
+  border: 1px solid #84818a;
+  margin: 20px 0;
 }

@@ -38,9 +38,7 @@ export const MainPage = () => {
         {articles.map((article) => (
           <Article key={article.id} {...article} />
         ))}
-        <div>
-          <Paginator numPages={numPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
-        </div>
+        <Paginator numPages={numPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
       </div>
     </div>
   )

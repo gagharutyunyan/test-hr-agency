@@ -1,0 +1,9 @@
+.articleComment {
+  border-bottom: 1px solid;
+  margin-bottom: 10px;
+}
+
+.articleComment:last-of-type {
+  border-bottom: none;
+  margin-bottom: 0;
+}
